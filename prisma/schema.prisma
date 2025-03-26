@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model planData {
+  plan_id_bd        Int     @id
+  planName          String  @db.VarChar(20)
+  planActive        Boolean
+  productInStore    Int
+  storeQuantity     Int
+  communityQuantity Int
+  price             Decimal @db.Decimal(10, 2) // Corrigido de Float para Decimal
+  sponsor_owner_plan sponsor_owner_plan[] // Relação oposta adicionada
+}
+
+model sponsor {
+  sponsor_id_bd      Int     @id
+  descriptionSponsor String? @db.VarChar(255)
+  descriptionTitle   String? @db.VarChar(255)
+  expirationUrl      String? @db.VarChar(255)
+  facebook           String? @db.VarChar(255)
+  highSponsorLogo    String? @db.VarChar(255)
+  instagram          String? @db.VarChar(255)
+  kawai              String? @db.VarChar(255)
+  linkedin           String? @db.VarChar(255)
+  lowSponsorLogo     String? @db.VarChar(255)
+  nameSponsor        String  @db.VarChar(255)
+  site_web           String? @db.VarChar(255)
+  tiktok             String? @db.VarChar(255)
+  urlSponsor         String? @db.VarChar(255)
+  whatsapp           String? @db.VarChar(255)
+  x                  String? @db.VarChar(255)
+  sponsor_owner_plan sponsor_owner_plan[] // Relação oposta adicionada
+}
+
+model owner {
+  owner_id_bd   Int     @id
+  storeOwnerId  Int?    @unique
+  owner_name    String  @db.VarChar(100)
+  stores        store[]          // Relação oposta para store
+  communities   community[]      // Relação oposta para community
+  usuarios      usuario[]        // Relação oposta para usuario
+  owner_communities owner_community[] // Relação oposta para owner_community
+}
+
+model store {
+  store_id_bd        Int     @id
+  storeId            String? @db.VarChar(255)
+  storeCategory      String? @db.VarChar(100)
+  storeName          String  @db.VarChar(100)
+  shortDescription   String? @db.VarChar(255)
+  isActive           Boolean
+  affiliateStore     Boolean
+  productLikeStore   Boolean
+  storeAffiliateLink String? @db.VarChar(255)
+  data_criacao       DateTime? @db.Date
+  owner_owner_id_bd  Int?
+  owner              owner?  @relation(fields: [owner_owner_id_bd], references: [owner_id_bd])
+}
+
+model community {
+  community_id_bd   Int     @id
+  placeId           Int?    @unique
+  bairro            String? @db.VarChar(100)
+  cep               String? @db.VarChar(8)
+  cidade            String  @db.VarChar(100)
+  condominio        String? @db.VarChar(100)
+  endereco          String? @db.VarChar(255)
+  estado            String  @db.VarChar(100)
+  geoPoint          String? @db.VarChar(255)
+  local             String? @db.VarChar(255)
+  tipoLocal         String? @db.VarChar(100)
+  owner_owner_id_bd Int?
+  owner             owner?  @relation(fields: [owner_owner_id_bd], references: [owner_id_bd])
+  owner_communities owner_community[]   // Relação oposta para owner_community
+  usuario_communities usuario_community[] // Relação oposta para usuario_community
+}
+
+model usuario {
+  user_id_bd        Int     @id
+  owner_owner_id_bd Int?
+  owner             owner?  @relation(fields: [owner_owner_id_bd], references: [owner_id_bd])
+  usuario_communities usuario_community[] // Relação oposta para usuario_community
+}
+
+model sponsor_owner_plan {
+  sponsor_sponsor_id_bd Int
+  planData_plan_id_bd   Int
+  data_inicio           DateTime @db.DateTime(0)
+  data_fim              DateTime? @db.DateTime(0)
+  sponsor               sponsor  @relation(fields: [sponsor_sponsor_id_bd], references: [sponsor_id_bd])
+  planData              planData @relation(fields: [planData_plan_id_bd], references: [plan_id_bd])
+  @@id([sponsor_sponsor_id_bd, planData_plan_id_bd])
+}
+
+model owner_community {
+  owner_owner_id_bd      Int
+  community_community_id_bd Int
+  owner                  owner    @relation(fields: [owner_owner_id_bd], references: [owner_id_bd])
+  community              community @relation(fields: [community_community_id_bd], references: [community_id_bd])
+  @@id([owner_owner_id_bd, community_community_id_bd])
+}
+
+model usuario_community {
+  usuario_user_id_bd     Int
+  community_community_id_bd Int
+  usuario                usuario  @relation(fields: [usuario_user_id_bd], references: [user_id_bd])
+  community              community @relation(fields: [community_community_id_bd], references: [community_id_bd])
+  @@id([usuario_user_id_bd, community_community_id_bd])
+}
