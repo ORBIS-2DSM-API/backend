@@ -29,7 +29,7 @@ CREATE TABLE planData (
     planActive BOOLEAN,
     productsPerStore INT,
     storeQuantity INT,
-    comunityQuantity INT,
+    communityQuantity INT,
     price DECIMAL(10,2),
     duration_months INT
 );
