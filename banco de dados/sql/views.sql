@@ -93,3 +93,26 @@ LEFT JOIN users_community uc ON uc.community_id = oc.community_id
 LEFT JOIN users u2 ON u2.id_user = uc.user_id
                    AND u2.user_date BETWEEN osp.start_date AND osp.end_date
 GROUP BY osp.id_owner_sponsor_plan, osp.owner_id;
+
+-- VIEW 7: vw_sponsor_owner_users
+-- Descrição: relaciona a quantidade de owners que um patrocinador possui
+-- Description: relation between all owners of an sponsor
+CREATE VIEW vw_sponsor_owner_users AS
+SELECT 
+    s.id_sponsor,
+    s.nameSponsor,
+    o.id_owner,
+    o.owner_name,
+    COUNT(DISTINCT u.id_user) AS total_users_impacted
+FROM 
+    sponsor s
+JOIN 
+    sponsor_plan sp ON s.id_sponsor = sp.sponsor_id
+JOIN 
+    owner_sponsor_plan osp ON sp.id_sponsor_plan = osp.sponsor_plan_id
+JOIN 
+    owner o ON osp.owner_id = o.id_owner
+LEFT JOIN 
+    users u ON o.id_owner = u.owner_id
+GROUP BY 
+    s.id_sponsor, s.nameSponsor, o.id_owner, o.owner_name;
