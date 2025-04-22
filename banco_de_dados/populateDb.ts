@@ -207,7 +207,7 @@ async function main() {
         slot_state: slot.slot_state,
         slot_city: slot.slot_city,
         slot_max_income: slot.slot_max_income,
-        slot_min_education_level: slot.slot_min_education_level,
+        slot_max_education_level: slot.slot_max_education_level,
         slot_quantity_available: slot.slot_quantity_available,
         slot_min_age: slot.slot_min_age,
       },

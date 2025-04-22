@@ -156,18 +156,23 @@ model capture_candidate {
   sponsorship_selection sponsorship_selection[]
 }
 
-model sponsorship_slot {
-  id_slot            Int       @id @default(autoincrement())
-  sponsor_plan_id    Int
-  slot_state         String
-  slot_city          String
-  slot_max_income    Float
-  slot_min_education_level String
-  slot_quantity_available Int
-  slot_min_age       Int
-  sponsor_plan       sponsor_plan @relation(fields: [sponsor_plan_id], references: [id_sponsor_plan])
-  sponsorship_selection sponsorship_selection[]
+model SponsorshipSlot {
+  id_slot                  Int       @id @default(autoincrement())
+  sponsor_plan_id          Int
+  slot_name                String?   @db.VarChar(50)
+  slot_slogan              String?   @db.VarChar(255)
+  slot_description         String?   @db.Text
+  slot_city                String?   @db.VarChar(50)
+  slot_state               String?   @db.VarChar(50)
+  slot_max_income          Decimal?  @db.Decimal(10,2)
+  slot_max_education_level String?   @db.VarChar(20)
+  slot_min_age             Int?
+  slot_quantity_available  Int?
+
+  sponsor_plan             SponsorPlan           @relation(fields: [sponsor_plan_id], references: [id_sponsor_plan])
+  sponsorship_selection    SponsorshipSelection[]
 }
+
 
 model sponsorship_selection {
   id_selection       Int       @id @default(autoincrement())
