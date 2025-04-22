@@ -1,0 +1,181 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model sponsor {
+  id_sponsor          Int       @id @default(autoincrement())
+  nameSponsor         String
+  descriptionSponsor  String
+  descriptionTitle    String
+  exclusiveUrl        String
+  site_web            String
+  facebook            String?
+  instagram          String?
+  linkedin           String?
+  tiktok             String?
+  kawai              String?
+  whatsapp           String?
+  x                  String?
+  lowSponsorLogo     String    @default("")
+  highSponsorLogo    String
+  urlSponsor         String
+  sponsor_plan       sponsor_plan[]
+}
+
+model planData {
+  id_planData        Int      @id @default(autoincrement())
+  planName           String
+  planActive         Boolean  @default(true)
+  productsPerStore   Int
+  storeQuantity      Int
+  communityQuantity  Int
+  price              Float
+  duration_months    Int
+  sponsor_plan       sponsor_plan[]
+}
+
+model sponsor_plan {
+  id_sponsor_plan    Int      @id @default(autoincrement())
+  sponsor_id         Int
+  planData_id        Int
+  quantity_purchased Int      @default(1)
+  purchased_date     DateTime
+  sponsor            sponsor  @relation(fields: [sponsor_id], references: [id_sponsor])
+  planData           planData @relation(fields: [planData_id], references: [id_planData])
+  owner_sponsor_plan owner_sponsor_plan[]
+  sponsorship_slot   sponsorship_slot[]
+}
+
+model owner {
+  id_owner           Int      @id @default(autoincrement())
+  storeOwnerId       String
+  owner_name         String
+  owner_sponsor_plan owner_sponsor_plan[]
+  store              store[]
+  users              users[]
+  owner_community    owner_community[]
+}
+
+model owner_sponsor_plan {
+  id_owner_sponsor_plan Int    @id @default(autoincrement())
+  owner_id            Int
+  sponsor_plan_id     Int
+  start_date          DateTime
+  end_date            DateTime
+  observation         String?
+  owner               owner       @relation(fields: [owner_id], references: [id_owner])
+  sponsor_plan        sponsor_plan @relation(fields: [sponsor_plan_id], references: [id_sponsor_plan])
+}
+
+model store {
+  id_store           Int      @id @default(autoincrement())
+  owner_id           Int
+  storeId            String
+  storeCategory      String
+  storeName          String
+  shortDescription   String
+  isActive           Boolean  @default(true)
+  affiliatedStore    Boolean  @default(true)
+  productLinkStore   Boolean  @default(true)
+  storeAffiliatedLink String?
+  storeImage         String
+  store_creation_date DateTime
+  owner              owner    @relation(fields: [owner_id], references: [id_owner])
+}
+
+model users {
+  id_user            Int      @id @default(autoincrement())
+  owner_id           Int
+  user_date          DateTime
+  owner              owner    @relation(fields: [owner_id], references: [id_owner])
+  users_community    users_community[]
+}
+
+model community {
+  id_community       Int      @id @default(autoincrement())
+  placeId            Int
+  bairro             String
+  cep                String
+  cidade             String
+  condominio         String?
+  endereco           String
+  estado             String
+  geoPoint           String
+  locale             String
+  tipoLocal          String
+  owner_id           Int
+  community_creation_date DateTime
+  owner_community    owner_community[]
+  users_community    users_community[]
+}
+
+model owner_community {
+  owner_id           Int
+  community_id       Int
+  registration_date  DateTime
+  owner              owner      @relation(fields: [owner_id], references: [id_owner])
+  community          community  @relation(fields: [community_id], references: [id_community])
+  
+  @@id([owner_id, community_id])
+}
+
+model users_community {
+  user_id            Int
+  community_id       Int
+  users              users       @relation(fields: [user_id], references: [id_user])
+  community          community  @relation(fields: [community_id], references: [id_community])
+  
+  @@id([user_id, community_id])
+}
+
+model capture_candidate {
+  id_cap_candidate   Int       @id @default(autoincrement())
+  full_name          String
+  cpf                String    @unique
+  birth_date         String
+  candidate_age      Int
+  gender             String    @db.Char(1)
+  street             String
+  number             String
+  complement         String?
+  state              String
+  city               String
+  phone              String
+  family_income      Float
+  email              String    @unique
+  education_level    String
+  notification_method String
+  postal_code        String
+  created_at         DateTime
+  sponsorship_selection sponsorship_selection[]
+}
+
+model sponsorship_slot {
+  id_slot            Int       @id @default(autoincrement())
+  sponsor_plan_id    Int
+  slot_state         String
+  slot_city          String
+  slot_max_income    Float
+  slot_min_education_level String
+  slot_quantity_available Int
+  slot_min_age       Int
+  sponsor_plan       sponsor_plan @relation(fields: [sponsor_plan_id], references: [id_sponsor_plan])
+  sponsorship_selection sponsorship_selection[]
+}
+
+model sponsorship_selection {
+  id_selection       Int       @id @default(autoincrement())
+  cap_candidate_id   Int
+  slot_id            Int
+  status_selection   String
+  selection_date     DateTime
+  expiration_date    DateTime
+  capture_candidate  capture_candidate @relation(fields: [cap_candidate_id], references: [id_cap_candidate])
+  sponsorship_slot   sponsorship_slot  @relation(fields: [slot_id], references: [id_slot])
+}
