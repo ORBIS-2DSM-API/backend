@@ -1524,57 +1524,67 @@
     }
   ],
   "sponsorship_slot": [
-    {
-      "id_slot": 1,
-      "sponsor_plan_id": 1,
-      "slot_state": "SP",
-      "slot_city": "São Paulo",
-      "slot_max_income": 3000.00,
-      "slot_min_education_level": "Ensino Médio",
-      "slot_quantity_available": 5,
-      "slot_min_age": 18
-    },
-    {
-      "id_slot": 2,
-      "sponsor_plan_id": 2,
-      "slot_state": "RJ",
-      "slot_city": "Rio de Janeiro",
-      "slot_max_income": 2000.00,
-      "slot_min_education_level": "Ensino Fundamental",
-      "slot_quantity_available": 3,
-      "slot_min_age": 16
-    },
-    {
-      "id_slot": 3,
-      "sponsor_plan_id": 3,
-      "slot_state": "SP",
-      "slot_city": "São Paulo",
-      "slot_max_income": 5000.00,
-      "slot_min_education_level": "Ensino Superior",
-      "slot_quantity_available": 10,
-      "slot_min_age": 21
-    },
-    {
-      "id_slot": 4,
-      "sponsor_plan_id": 4,
-      "slot_state": "MG",
-      "slot_city": "Belo Horizonte",
-      "slot_max_income": 2500.00,
-      "slot_min_education_level": "Ensino Médio",
-      "slot_quantity_available": 4,
-      "slot_min_age": 18
-    },
-    {
-      "id_slot": 5,
-      "sponsor_plan_id": 5,
-      "slot_state": "RS",
-      "slot_city": "Porto Alegre",
-      "slot_max_income": 3500.00,
-      "slot_min_education_level": "Ensino Superior",
-      "slot_quantity_available": 6,
-      "slot_min_age": 20
-    }
-  ],
+  {
+    "sponsor_plan_id": 1,
+    "slot_name": "Vaga Patrocínio SP",
+    "slot_slogan": "Oportunidade em São Paulo",
+    "slot_description": "Vaga para moradores de SP com ensino médio",
+    "slot_city": "São Paulo",
+    "slot_state": "SP",
+    "slot_max_income": 3000.00,
+    "slot_max_education_level": "Ensino Médio",
+    "slot_min_age": 18,
+    "slot_quantity_available": 5
+  },
+  {
+    "sponsor_plan_id": 2,
+    "slot_name": "Vaga Patrocínio RJ",
+    "slot_slogan": "Oportunidade no Rio",
+    "slot_description": "Vaga para jovens do Rio de Janeiro",
+    "slot_city": "Rio de Janeiro",
+    "slot_state": "RJ",
+    "slot_max_income": 2000.00,
+    "slot_max_education_level": "Ensino Fundamental",
+    "slot_min_age": 16,
+    "slot_quantity_available": 3
+  },
+  {
+    "sponsor_plan_id": 3,
+    "slot_name": "Vaga Premium SP",
+    "slot_slogan": "Para graduados em SP",
+    "slot_description": "Vaga exclusiva para graduados em São Paulo",
+    "slot_city": "São Paulo",
+    "slot_state": "SP",
+    "slot_max_income": 5000.00,
+    "slot_max_education_level": "Ensino Superior",
+    "slot_min_age": 21,
+    "slot_quantity_available": 10
+  },
+  {
+    "sponsor_plan_id": 4,
+    "slot_name": "Vaga Patrocínio MG",
+    "slot_slogan": "Oportunidade em BH",
+    "slot_description": "Vaga para moradores de Belo Horizonte",
+    "slot_city": "Belo Horizonte",
+    "slot_state": "MG",
+    "slot_max_income": 2500.00,
+    "slot_max_education_level": "Ensino Médio",
+    "slot_min_age": 18,
+    "slot_quantity_available": 4
+  },
+  {
+    "sponsor_plan_id": 5,
+    "slot_name": "Vaga Patrocínio RS",
+    "slot_slogan": "Oportunidade em POA",
+    "slot_description": "Vaga para graduados em Porto Alegre",
+    "slot_city": "Porto Alegre",
+    "slot_state": "RS",
+    "slot_max_income": 3500.00,
+    "slot_max_education_level": "Ensino Superior",
+    "slot_min_age": 20,
+    "slot_quantity_available": 6
+  }
+],
   "sponsorship_selection": [
     {
       "id_selection": 1,

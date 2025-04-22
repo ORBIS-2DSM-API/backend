@@ -156,7 +156,7 @@ model capture_candidate {
   sponsorship_selection sponsorship_selection[]
 }
 
-model SponsorshipSlot {
+model sponsorship_slot {
   id_slot                  Int       @id @default(autoincrement())
   sponsor_plan_id          Int
   slot_name                String?   @db.VarChar(50)
@@ -169,8 +169,8 @@ model SponsorshipSlot {
   slot_min_age             Int?
   slot_quantity_available  Int?
 
-  sponsor_plan             SponsorPlan           @relation(fields: [sponsor_plan_id], references: [id_sponsor_plan])
-  sponsorship_selection    SponsorshipSelection[]
+  sponsor_plan       sponsor_plan @relation(fields: [sponsor_plan_id], references: [id_sponsor_plan])
+   sponsorship_selection sponsorship_selection[]
 }
 
 

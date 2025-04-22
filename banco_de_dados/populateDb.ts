@@ -204,6 +204,9 @@ async function main() {
       data: {
         id_slot: slot.id_slot,
         sponsor_plan_id: slot.sponsor_plan_id,
+        slot_name: slot.slot_name || null,
+        slot_slogan: slot.slot_slogan || null,
+        slot_description: slot.slot_description || null,
         slot_state: slot.slot_state,
         slot_city: slot.slot_city,
         slot_max_income: slot.slot_max_income,
