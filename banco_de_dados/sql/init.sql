@@ -162,7 +162,7 @@ CREATE TABLE sponsorship_slot (
     slot_city VARCHAR(50),
     slot_state VARCHAR(50),
     slot_max_income DECIMAL(10,2),
-    slot_max_education_level VARCHAR(20),
+    slot_max_education_level VARCHAR(50),
     slot_min_age INT,
     slot_quantity_available INT,
     FOREIGN KEY (sponsor_plan_id) REFERENCES sponsor_plan(id_sponsor_plan)

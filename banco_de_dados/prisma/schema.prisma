@@ -165,7 +165,7 @@ model sponsorship_slot {
   slot_city                String?   @db.VarChar(50)
   slot_state               String?   @db.VarChar(50)
   slot_max_income          Decimal?  @db.Decimal(10,2)
-  slot_max_education_level String?   @db.VarChar(20)
+  slot_max_education_level String?   @db.VarChar(50)
   slot_min_age             Int?
   slot_quantity_available  Int?
 
