@@ -9,7 +9,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: helpnei
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - ./sql:/docker-entrypoint-initdb.d  # mounts all .sql scripts   # monta todos os scripts .sql
       - ./my.cnf:/etc/mysql/conf.d/my.cnf  # enables the event scheduler after restart    # ativa o event scheduler após restart
