@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
+    "start": "node server.js",
     "setup:db": "prisma migrate dev --name init --schema=./banco_de_dados/prisma/schema.prisma && npx ts-node ./banco_de_dados/populateDb.ts"
   },
   "keywords": [],
